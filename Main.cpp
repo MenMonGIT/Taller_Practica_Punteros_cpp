@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include "Avatar.h"
 #include "Menus.h"
 int main(){
