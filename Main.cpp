@@ -5,6 +5,5 @@ int main(){
     Menus menus;
     menus.inicio("julian");
 
-
     
 }

@@ -1,6 +1,7 @@
 #ifndef MENUS_H
 #define MENUS_H
 #include <string>
+
 class Menus{
     private:
         int opcion;
@@ -11,11 +12,5 @@ class Menus{
         int solucion();
 
 };
-
-
-
-
-
-
 
 #endif //MENUS_H
