@@ -8,9 +8,8 @@ private:
     int matriz[FILAS][COLUMNAS];
 
 public:
-    Tablero();
-    void setValores(const int nuevosValores[FILAS][COLUMNAS]);
-    void imprimir() const;
+    Tablero();  // Constructor
+    void imprimir(int x, int y);  // Imprimir la matriz y colocar el 2 en (x, y)
 };
 
-#endif //TABLERO_H
+#endif

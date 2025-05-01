@@ -1,23 +1,21 @@
 #include "Tablero.h"
+#include <iostream>
 
 int main() {
     Tablero t;
 
-    int misValores[10][10] = {
-        {0,0,0,1,1,0,1,0,0,0},
-        {1,1,0,0,0,0,0,1,1,0},
-        {0,1,1,1,1,1,0,0,0,0},
-        {0,0,0,0,0,0,0,1,0,1},
-        {0,1,1,1,1,1,0,0,0,0},
-        {0,1,0,0,0,1,1,0,1,0},
-        {0,1,0,1,0,1,0,0,0,1},
-        {0,0,0,1,0,0,0,1,1,1},
-        {1,0,1,1,0,1,1,0,0,0},
-        {1,0,0,1,0,0,0,0,1,0}
-    };
+    
+    t.imprimir(3, 0); //prueba
 
-    t.setValores(misValores);
-    t.imprimir();
+    std::cout<<"\n"; //prueba
+
+    t.imprimir(2, 3); //prueba
+
+    std::cout<<"\n"; //prueba
+
+    t.imprimir(9, 9); //prueba
+
+    std::cout<<"\n"; //prueba
 
     return 0;
 }
