@@ -1,23 +1,14 @@
-all: main
+CXX = g++
+CXXFLAGS = -Wall -std=c++11
 
-# Compilador
-CXX = clang++
-override CXXFLAGS += -g -Wall -Werror
+SRCS = main.cpp Tablero.cpp 
+OBJS = $(SRCS:.cpp=.o)
+EXEC = main
 
-# Biblioteca requerida
-LIBS = -lcurl
+all: $(EXEC)
 
-# Encontrar archivos fuente
-SRCS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.cpp' -print | sed -e 's/ /\\ /g')
+$(EXEC): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(EXEC) $(OBJS)
 
-# Regla principal (compilación y enlazado en un solo paso)
-main: $(SRCS)
-	$(CXX) $(CXXFLAGS) $(SRCS) -o $@ $(LIBS)
-
-# Compilación en modo debug sin optimizaciones
-main-debug: $(SRCS)
-	NIX_HARDENING_ENABLE= $(CXX) $(CXXFLAGS) -O0 $(SRCS) -o $@ $(LIBS)
-
-# Limpiar archivos generados
 clean:
-	rm -f main main-debug
+	rm -f $(OBJS) $(EXEC)
