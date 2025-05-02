@@ -1,3 +1,5 @@
+
+/*
 #include <iostream>
 #include "Tablero.h"
 
@@ -6,3 +8,4 @@ int main() {
     t.dfs(0, 0);  // Empieza desde la esquina superior izquierda
     return 0;
 }
+*/
