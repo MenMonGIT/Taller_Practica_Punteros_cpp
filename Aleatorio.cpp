@@ -1,6 +1,6 @@
 #include "Aleatorio.h"
-#include <cstdlib>
-#include <ctime>
+#include <cstdlib> // para usar rand() y srand()
+#include <ctime> // para time(0) que inicializa la semilla aleatoria
 
 Aleatorio::Aleatorio(){
   std::srand(std::time(0)); // inicializar la semilla aleatoria una vez
