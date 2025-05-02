@@ -7,7 +7,7 @@ class Menus{
         int opcion;
     public:
         Menus();
-        int inicio(std::string nombre);
+        int inicio();
         int seleccion();
         int solucion();
 

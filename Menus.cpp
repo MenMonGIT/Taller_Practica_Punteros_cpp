@@ -4,7 +4,7 @@
 using namespace std;
 Menus::Menus(){
 }
-int Menus::inicio(string nombre){
+int Menus::inicio(){
 
     cout<<"1.INICIAR JUEGO"<<endl;
     cout<<"2.SALIR"<<endl;
@@ -14,7 +14,7 @@ int Menus::inicio(string nombre){
     switch(this->opcion){
 
         case 1:{
-            Avatar avatar1(nombre);
+            Avatar avatar1;
             break;
     }
         case 2:

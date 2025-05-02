@@ -4,13 +4,9 @@
 int main(){
    // Avatar avatar1("julian");
     Menus menus;
-    menus.inicio("julian");
+    menus.inicio();
 
-    Tablero t;
-    Aleatorio aleatorio1;
-    t.imprimir(0,0);
-    //pruebas para aleatorio
-    //aleatorio1.generarPosicionValida();
+
 
 
 }

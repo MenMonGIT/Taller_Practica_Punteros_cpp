@@ -9,6 +9,7 @@ private:
 
 public:
     Tablero();  // Constructor
+    int (*arreglo())[10] { return matriz; }  // Returns pointer to array of 10 ints
     void imprimir(int x, int y);  // Imprimir la matriz y colocar el 2 en (x, y)
     void marcar() const;
     bool dfs(int x, int y);
