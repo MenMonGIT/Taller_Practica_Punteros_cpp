@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Tablero.h"
+#include <unistd.h>
 
 
 // Constructor que carga una matriz con valores fijos
@@ -57,4 +58,43 @@ void Tablero::imprimir(int x, int y) {
         }
         std::cout << std::endl;
     }
+}
+
+void Tablero::marcar() const {
+    for (int i = 0; i < FILAS; ++i) {
+        for (int j = 0; j < COLUMNAS; ++j) {
+            if (matriz[i][j] == 2)
+                std::cout << "_ ";
+            else if (matriz[i][j] == 1)
+                std::cout << "# ";
+            else
+                std::cout << ". ";
+        }
+        std::cout << "\n";
+    }
+    std::cout << std::endl;
+}
+
+bool Tablero::dfs(int x, int y) {
+    if (x < 0 || x >= FILAS || y < 0 || y >= COLUMNAS)
+        return false;
+    if (matriz[x][y] != 0)
+        return false;
+
+    matriz[x][y] = 2;  // Marcar como parte del camino
+    system("clear");
+    marcar();
+    usleep(200000); // 200 ms
+
+
+    if (x == 9 && y == 9)
+        return true;
+
+    if (dfs(x + 1, y)) return true;
+    if (dfs(x, y + 1)) return true;
+    if (dfs(x - 1, y)) return true;
+    if (dfs(x, y - 1)) return true;
+
+    matriz[x][y] = 0; // Backtrack
+    return false;
 }

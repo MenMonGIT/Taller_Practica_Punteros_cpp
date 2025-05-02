@@ -1,21 +1,8 @@
-#include "Tablero.h"
 #include <iostream>
+#include "Tablero.h"
 
 int main() {
     Tablero t;
-
-    
-    t.imprimir(3, 0); //prueba
-
-    std::cout<<"\n"; //prueba
-
-    t.imprimir(2, 3); //prueba
-
-    std::cout<<"\n"; //prueba
-
-    t.imprimir(9, 9); //prueba
-
-    std::cout<<"\n"; //prueba
-
+    t.dfs(0, 0);  // Empieza desde la esquina superior izquierda
     return 0;
 }
