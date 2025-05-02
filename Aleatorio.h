@@ -2,11 +2,13 @@
 #define ALEATORIO_H
 class Aleatorio{
     private:
-        //aqui atributos privados de la clase
+        //No es necesario añadir atributos, ya que esta clase es una clase utilitaria
+        //Es decir, será utilizada directamente a través del método en vez de ser instanciada
     public:
-        Aleatorio(); //constructor por defecto
-        //aqui metodos de la clase a parte del constructor
-        
+        Aleatorio();  // Constructor por defecto
+
+        // Genera una posición aleatoria válida (celda con valor 1)
+        void generarPosicionValida(int laberinto[][10], int filas, int columnas, int& x, int& y);
 };
 
 
