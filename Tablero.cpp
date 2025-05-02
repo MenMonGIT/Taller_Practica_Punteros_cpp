@@ -7,16 +7,16 @@
 Tablero::Tablero() {
     // Matriz con los valores predeterminados
     int misValores[10][10] = {
-        {0,0,0,1,1,0,1,0,0,0},
-        {1,1,0,0,0,0,0,1,1,0},
-        {0,1,1,1,1,1,0,0,0,0},
-        {0,0,0,0,0,0,0,1,0,1},
-        {0,1,1,1,1,1,0,0,0,0},
-        {0,1,0,0,0,1,1,0,1,0},
-        {0,1,0,1,0,1,0,0,0,1},
-        {0,0,0,1,0,0,0,1,1,1},
-        {1,0,1,1,0,1,1,0,0,0},
-        {1,0,0,1,0,0,0,0,1,0}
+        {1,1,1,0,0,1,0,1,1,1},
+        {0,0,1,1,1,1,1,0,0,1},
+        {1,0,0,0,0,0,1,1,1,1},
+        {1,1,1,1,1,1,1,0,1,0},
+        {1,0,0,0,0,0,1,1,1,1},
+        {1,0,1,1,1,0,0,1,0,1},
+        {1,0,1,0,1,0,1,1,1,0},
+        {1,1,1,0,1,1,1,0,0,0},
+        {0,1,0,0,1,0,0,1,1,1},
+        {0,1,1,0,1,1,1,1,0,1}
     };
 
     // Cargar los valores en la matriz
@@ -49,7 +49,7 @@ void Tablero::imprimir(int x, int y) {
 
     for (int i = 0; i < FILAS; ++i) {
         for (int j = 0; j < COLUMNAS; ++j) {
-            if (matriz[i][j] == 1)
+            if (matriz[i][j] == 0)
                 std::cout << "# ";  // Imprimir "#" en lugar de "1"
             else if (matriz[i][j] == 2)
                 std::cout << "X ";  // Imprimir "X" en lugar de "2"
@@ -65,7 +65,7 @@ void Tablero::marcar() const {
         for (int j = 0; j < COLUMNAS; ++j) {
             if (matriz[i][j] == 2)
                 std::cout << "_ ";
-            else if (matriz[i][j] == 1)
+            else if (matriz[i][j] == 0)
                 std::cout << "# ";
             else
                 std::cout << ". ";
@@ -78,7 +78,7 @@ void Tablero::marcar() const {
 bool Tablero::dfs(int x, int y) {
     if (x < 0 || x >= FILAS || y < 0 || y >= COLUMNAS)
         return false;
-    if (matriz[x][y] != 0)
+    if (matriz[x][y] != 1)
         return false;
 
     matriz[x][y] = 2;  // Marcar como parte del camino
@@ -95,6 +95,6 @@ bool Tablero::dfs(int x, int y) {
     if (dfs(x - 1, y)) return true;
     if (dfs(x, y - 1)) return true;
 
-    matriz[x][y] = 0; // Backtrack
+    matriz[x][y] = 1; // Backtrack
     return false;
 }
