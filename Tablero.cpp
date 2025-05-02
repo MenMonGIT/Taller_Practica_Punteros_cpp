@@ -1,21 +1,22 @@
 #include <iostream>
 #include "Tablero.h"
+#include <unistd.h>
 
 
 // Constructor que carga una matriz con valores fijos
 Tablero::Tablero() {
     // Matriz con los valores predeterminados
     int misValores[10][10] = {
-        {0,0,0,1,1,0,1,0,0,0},
-        {1,1,0,0,0,0,0,1,1,0},
-        {0,1,1,1,1,1,0,0,0,0},
-        {0,0,0,0,0,0,0,1,0,1},
-        {0,1,1,1,1,1,0,0,0,0},
-        {0,1,0,0,0,1,1,0,1,0},
-        {0,1,0,1,0,1,0,0,0,1},
-        {0,0,0,1,0,0,0,1,1,1},
-        {1,0,1,1,0,1,1,0,0,0},
-        {1,0,0,1,0,0,0,0,1,0}
+        {1,1,1,0,0,1,0,1,1,1},
+        {0,0,1,1,1,1,1,0,0,1},
+        {1,0,0,0,0,0,1,1,1,1},
+        {1,1,1,1,1,1,1,0,1,0},
+        {1,0,0,0,0,0,1,1,1,1},
+        {1,0,1,1,1,0,0,1,0,1},
+        {1,0,1,0,1,0,1,1,1,0},
+        {1,1,1,0,1,1,1,0,0,0},
+        {0,1,0,0,1,0,0,1,1,1},
+        {0,1,1,0,1,1,1,1,0,1}
     };
 
     // Cargar los valores en la matriz
@@ -48,7 +49,7 @@ void Tablero::imprimir(int x, int y) {
 
     for (int i = 0; i < FILAS; ++i) {
         for (int j = 0; j < COLUMNAS; ++j) {
-            if (matriz[i][j] == 1)
+            if (matriz[i][j] == 0)
                 std::cout << "# ";  // Imprimir "#" en lugar de "1"
             else if (matriz[i][j] == 2)
                 std::cout << "X ";  // Imprimir "X" en lugar de "2"
@@ -57,4 +58,43 @@ void Tablero::imprimir(int x, int y) {
         }
         std::cout << std::endl;
     }
+}
+
+void Tablero::marcar() const {
+    for (int i = 0; i < FILAS; ++i) {
+        for (int j = 0; j < COLUMNAS; ++j) {
+            if (matriz[i][j] == 2)
+                std::cout << "_ ";
+            else if (matriz[i][j] == 0)
+                std::cout << "# ";
+            else
+                std::cout << ". ";
+        }
+        std::cout << "\n";
+    }
+    std::cout << std::endl;
+}
+
+bool Tablero::dfs(int x, int y) {
+    if (x < 0 || x >= FILAS || y < 0 || y >= COLUMNAS)
+        return false;
+    if (matriz[x][y] != 1)
+        return false;
+
+    matriz[x][y] = 2;  // Marcar como parte del camino
+    system("clear");
+    marcar();
+    usleep(200000); // 200 ms
+
+
+    if (x == 9 && y == 9)
+        return true;
+
+    if (dfs(x + 1, y)) return true;
+    if (dfs(x, y + 1)) return true;
+    if (dfs(x - 1, y)) return true;
+    if (dfs(x, y - 1)) return true;
+
+    matriz[x][y] = 1; // Backtrack
+    return false;
 }
