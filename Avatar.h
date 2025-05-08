@@ -12,7 +12,7 @@ class Avatar{
         int posX, posY;      // Posición actual
 
     public:
-        Avatar(std::string); // Constructor con nombre
+        Avatar(); // Constructor con nombre
         ~Avatar();           // Destructor
         void movimiento();   // Método para movimiento (no implementado)
 

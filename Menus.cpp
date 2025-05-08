@@ -1,13 +1,15 @@
 #include "Menus.h"
 #include "Avatar.h"
 #include <iostream>
+#include "Tablero.h"
+#include <unistd.h>
 using namespace std;
 
 Menus::Menus(){
 }
 
 // Muestra menú inicial y procesa opción
-int Menus::inicio(string nombre){
+int Menus::inicio(){
     cout<<"1.INICIAR JUEGO"<<endl;
     cout<<"2.SALIR"<<endl;
     cout<<"Digite su opcion:";
@@ -15,7 +17,32 @@ int Menus::inicio(string nombre){
 
     switch(this->opcion){
         case 1:{
-            Avatar avatar1(nombre);
+            Avatar avatar;
+            Tablero t;
+            Menus menus;
+            // Inicializa tablero y avatar
+            do{
+                system("cls||clear");
+                t.imprimir(avatar.getPosX(), avatar.getPosY());
+                
+                int direccion = menus.seleccion();
+                int esautomatico=menus.solucion();
+                if (esautomatico == 2) {
+                    t.dfs(avatar.getPosX(), avatar.getPosY());
+                }
+                bool movimientoValido = false;
+                switch(direccion) {
+                    case 1: movimientoValido = avatar.moverArriba(); break;
+                    case 2: movimientoValido = avatar.moverAbajo(); break;
+                    case 3: movimientoValido = avatar.moverIzquierda(); break;
+                    case 4: movimientoValido = avatar.moverDerecha(); break;
+                    default: break;
+                }
+                
+                if(!movimientoValido) {
+                    menus.mostrarMovimientoInvalido();
+                }
+            }while(avatar.getPosX() != 9 || avatar.getPosY() != 9);
             break;
         }
         case 2:

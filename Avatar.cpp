@@ -5,7 +5,9 @@
 #include <iostream>
 
 // Constructor: inicializa avatar con nombre y posición aleatoria válida
-Avatar::Avatar(std::string nombre) : nombre(nombre) {
+Avatar::Avatar(){
+    std::cout<<"Digita tu nombre jugador: ";
+    std::cin>>this->nombre;
     do {
         posX = Aleatorio::generarNumero(0, 9);
         posY = Aleatorio::generarNumero(0, 9);

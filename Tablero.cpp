@@ -1,5 +1,7 @@
 #include "Tablero.h"
 #include <iostream>
+#include <unistd.h> // Para usleep
+#include <cstdlib> // Para system("clear")
 
 // Constructor: inicializa matriz con caminos y precipicios
 Tablero::Tablero() {
@@ -62,4 +64,47 @@ void Tablero::limpiarPosicion(int x, int y) {
     if (x >= 0 && x < FILAS && y >= 0 && y < COLUMNAS && matriz[x][y] == 2) {
         matriz[x][y] = 1;
     }
+}
+//marcar el camino
+void Tablero::marcar() const {
+    for (int i = 0; i < FILAS; ++i) {
+        for (int j = 0; j < COLUMNAS; ++j) {
+            if (matriz[i][j] == 2)
+                std::cout << "_ ";
+            else if (matriz[i][j] == 0)
+                std::cout << "# ";
+            else
+                std::cout << ". ";
+        }
+        std::cout << "\n";
+    }
+    std::cout << std::endl;
+}
+
+
+//algoritmo de solucion automatica
+// Busca un camino desde (0,0) a (9,9) usando DFS
+bool Tablero::dfs(int x, int y) {
+    
+    if (x < 0 || x >= FILAS || y < 0 || y >= COLUMNAS)
+        return false;
+    if (matriz[x][y] != 1)
+        return false;
+
+    matriz[x][y] = 2;  // Marcar como parte del camino
+    system("clear");
+    marcar();
+    usleep(200000); // 200 ms
+
+
+    if (x == 9 && y == 9)
+        return true;
+
+    if (dfs(x + 1, y)) return true;
+    if (dfs(x, y + 1)) return true;
+    if (dfs(x - 1, y)) return true;
+    if (dfs(x, y - 1)) return true;
+
+    matriz[x][y] = 1; // Backtrack
+    return false;
 }
