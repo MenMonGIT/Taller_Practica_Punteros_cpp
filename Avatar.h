@@ -3,27 +3,24 @@
 #include "Tablero.h"
 #include <string>
 #include "Movimiento.h"
-#include "Menus.h"
-#include "Aleatorio.h" 
 
 class Avatar{
     private:
         Tablero tablero1;
-        Aleatorio aleatorio;//de esta genera el aleatorio para poder escoger solucion automatica o manual 
-        Menus menu1;
-        Movimiento moverse; //esta parte depende de la seleccion de manual o automatico
+        Movimiento* moverse;
         std::string nombre;
+        int posX, posY;
 
     public:
-
         Avatar();
-        void jugar();
+        ~Avatar();
+        bool moverArriba();
+        bool moverAbajo();
+        bool moverIzquierda();
+        bool moverDerecha();
         
-
+        int getPosX() const { return posX; }
+        int getPosY() const { return posY; }
+        Tablero& getTablero() { return tablero1; }
 };
-
-
-
-
-
-#endif //AVATAR_H
+#endif

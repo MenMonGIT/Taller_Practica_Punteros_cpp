@@ -2,15 +2,12 @@
 #define MENUS_H
 #include <string>
 
-class Menus{
-    private:
-        int opcion;
-    public:
-        Menus();
-        int inicio();
-        int seleccion();
-        int solucion();
-
+class Menus {
+public:
+    int inicio();
+    int preguntarModoJuego(); // Nuevo método
+    int seleccion();
+    void mostrarMovimientoInvalido();
 };
 
-#endif //MENUS_H
+#endif

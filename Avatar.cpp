@@ -1,19 +1,59 @@
 #include "Avatar.h"
 #include "Movimiento.h"
 #include "Tablero.h"
+#include "Aleatorio.h"
 #include <iostream>
 
-
+// Constructor: inicializa avatar con nombre y posición aleatoria válida
 Avatar::Avatar(){
     std::cout<<"Digita tu nombre jugador: ";
     std::cin>>this->nombre;
-    jugar();
+    do {
+        posX = Aleatorio::generarNumero(0, 9);
+        posY = Aleatorio::generarNumero(0, 9);
+    } while (!tablero1.esCaminoValido(posX, posY));
+    
+    moverse = new Movimiento(&tablero1, posX, posY);
 }
-void Avatar::jugar(){
-    int x=0;
-    int y=0;
-    aleatorio.generarPosicionValida(tablero1.arreglo(),10,10,x,y);//esto deberia retornar una tupla
-    if(menu1.solucion()==2){
-        tablero1.dfs(x,y);
+
+// Destructor: libera memoria de Movimiento
+Avatar::~Avatar() {
+    delete moverse;
+}
+
+
+// Mueve avatar arriba si es posible, actualiza posX
+bool Avatar::moverArriba() {
+    if(moverse->moverArriba()) {
+        posX = moverse->getPosX();
+        return true;
     }
+    return false;
+}
+
+// Mueve avatar abajo si es posible, actualiza posX
+bool Avatar::moverAbajo() {
+    if(moverse->moverAbajo()) {
+        posX = moverse->getPosX();
+        return true;
+    }
+    return false;
+}
+
+// Mueve avatar izquierda si es posible, actualiza posY
+bool Avatar::moverIzquierda() {
+    if(moverse->moverIzquierda()) {
+        posY = moverse->getPosY();
+        return true;
+    }
+    return false;
+}
+
+// Mueve avatar derecha si es posible, actualiza posY
+bool Avatar::moverDerecha() {
+    if(moverse->moverDerecha()) {
+        posY = moverse->getPosY();
+        return true;
+    }
+    return false;
 }

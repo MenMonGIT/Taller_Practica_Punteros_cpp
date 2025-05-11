@@ -1,11 +1,11 @@
-#include <iostream>
 #include "Tablero.h"
-#include <unistd.h>
+#include <iostream>
+#include <unistd.h> // Para usleep
+#include <cstdlib> // Para system("clear")
+using namespace std;
 
-
-// Constructor que carga una matriz con valores fijos
+// Constructor: inicializa matriz con caminos y precipicios
 Tablero::Tablero() {
-    // Matriz con los valores predeterminados
     int misValores[10][10] = {
         {1,1,1,0,0,1,0,1,1,1},
         {0,0,1,1,1,1,1,0,0,1},
@@ -19,7 +19,6 @@ Tablero::Tablero() {
         {0,1,1,0,1,1,1,1,0,1}
     };
 
-    // Cargar los valores en la matriz
     for (int i = 0; i < FILAS; ++i) {
         for (int j = 0; j < COLUMNAS; ++j) {
             matriz[i][j] = misValores[i][j];
@@ -27,7 +26,7 @@ Tablero::Tablero() {
     }
 }
 
-// Método para imprimir el tablero con símbolos
+// Imprime tablero y marca posición del jugador
 void Tablero::imprimir(int x, int y) {
 
      // Primero, borra cualquier 2 que esté en la matriz antes de colocar un nuevo 2
@@ -60,6 +59,25 @@ void Tablero::imprimir(int x, int y) {
     }
 }
 
+// Verifica si posición es camino válido
+bool Tablero::esCaminoValido(int x, int y) const {
+    return (x >= 0 && x < FILAS && y >= 0 && y < COLUMNAS && matriz[x][y] == 1);
+}
+
+// Marca posición en el tablero
+void Tablero::marcarPosicion(int x, int y) {
+    if (esCaminoValido(x, y)) {
+        matriz[x][y] = 2;
+    }
+}
+
+// Limpia posición marcada en el tablero
+void Tablero::limpiarPosicion(int x, int y) {
+    if (x >= 0 && x < FILAS && y >= 0 && y < COLUMNAS && matriz[x][y] == 2) {
+        matriz[x][y] = 1;
+    }
+}
+//marcar el camino
 void Tablero::marcar() const {
     for (int i = 0; i < FILAS; ++i) {
         for (int j = 0; j < COLUMNAS; ++j) {
@@ -75,6 +93,9 @@ void Tablero::marcar() const {
     std::cout << std::endl;
 }
 
+
+//algoritmo de solucion automatica
+// Busca un camino desde (0,0) a (9,9) usando DFS
 bool Tablero::dfs(int x, int y) {
     if (x < 0 || x >= FILAS || y < 0 || y >= COLUMNAS)
         return false;

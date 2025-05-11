@@ -1,49 +1,40 @@
 #include "Menus.h"
-#include "Avatar.h"
 #include <iostream>
 using namespace std;
-Menus::Menus(){
-}
-int Menus::inicio(){
-
-    cout<<"1.INICIAR JUEGO"<<endl;
-    cout<<"2.SALIR"<<endl;
-    cout<<"Digite su opcion:";
-    cin>>this->opcion;
-
-    switch(this->opcion){
-
-        case 1:{
-            Avatar avatar1;
-            break;
-    }
-        case 2:
-            cout<<"¡Gracias por jugar!" <<endl;
-            break;
-        default:
-            cout<<"Seleccion invalida";
-            return 1;
-            break;
-    }
-
-    return 0;
-}
-int Menus::seleccion(){
-
-    cout<<"1.Arriba"<<endl;
-    cout<<"2.Abajo"<<endl;
-    cout<<"3.Izquierda"<<endl;
-    cout<<"4.Derecha"<<endl;
-    cout<<"Digite su opcion: ";
-    cin>>this->opcion;
-    return this->opcion;
+int Menus::inicio() {
+    int opcion;
+    cout << "1. INICIAR JUEGO\n";
+    cout << "2. SALIR\n";
+    cout << "Digite su opcion: ";
+    cin >> opcion;
+    return opcion;
 }
 
-int Menus::solucion(){
+int Menus::preguntarModoJuego() {
+    int opcion;
+    cout << "\nSELECCIONE MODO DE JUEGO:\n";
+    cout << "1. Manual (moverse paso a paso)\n";
+    cout << "2. Automático (ver solución completa)\n";
+    cout << "Digite su opcion: ";
+    cin >> opcion;
+    return opcion;
+}
 
-    cout<<"1. Solucion Manual"<<endl;
-    cout<<"2. Solucion Automatica"<<endl;
-    cout<<"Digite su opcion: ";
-    cin>>this->opcion;
-    return this->opcion;
+int Menus::seleccion() {
+    int opcion;
+    cout << "\nMOVIMIENTO:\n";
+    cout << "1. Arriba\n";
+    cout << "2. Abajo\n";
+    cout << "3. Izquierda\n";
+    cout << "4. Derecha\n";
+    cout << "Digite su opcion: ";
+    cin >> opcion;
+    return opcion;
+}
+
+void Menus::mostrarMovimientoInvalido() {
+    cout << "\n¡Movimiento inválido! Intente otra dirección.\n";
+    cout << "Presione Enter para continuar...";
+    cin.ignore();
+    cin.get();
 }
