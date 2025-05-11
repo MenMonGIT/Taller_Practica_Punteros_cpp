@@ -28,15 +28,34 @@ Tablero::Tablero() {
 
 // Imprime tablero y marca posición del jugador
 void Tablero::imprimir(int x, int y) {
-    system("cls||clear");
+
+     // Primero, borra cualquier 2 que esté en la matriz antes de colocar un nuevo 2
     for (int i = 0; i < FILAS; ++i) {
         for (int j = 0; j < COLUMNAS; ++j) {
-            if (i == x && j == y) std::cout << "X "; // Posición actual
-            else if (matriz[i][j] == 0) std::cout << "# "; // Muro
-            else if (matriz[i][j] == 2) std::cout << "o "; // Visitado
-            else std::cout << ". "; // Camino libre
+            if (matriz[i][j] == 2) {
+                matriz[i][j] = 0;  // Restablece el valor a 0
+            }
         }
-        std::cout << "\n";
+    }
+
+    
+    // Verificar que x y y estén dentro de los límites de la matriz
+    if (x >= 0 && x < FILAS && y >= 0 && y < COLUMNAS) {
+        matriz[x][y] = 2;  // Coloca un 2 en la posición (x, y)
+    } else {
+        std::cout << "Índices fuera del mapa!" << std::endl;
+    }
+
+    for (int i = 0; i < FILAS; ++i) {
+        for (int j = 0; j < COLUMNAS; ++j) {
+            if (matriz[i][j] == 0)
+                std::cout << "# ";  // Imprimir "#" en lugar de "1"
+            else if (matriz[i][j] == 2)
+                std::cout << "X ";  // Imprimir "X" en lugar de "2"
+            else
+                std::cout << ". ";  // Imprimir "." en lugar de "0"
+        }
+        std::cout << std::endl;
     }
 }
 
@@ -78,24 +97,25 @@ void Tablero::marcar() const {
 //algoritmo de solucion automatica
 // Busca un camino desde (0,0) a (9,9) usando DFS
 bool Tablero::dfs(int x, int y) {
-    if (!esCaminoValido(x, y)) return false;
-    
-    matriz[x][y] = 2; // Marcar como visitado
-    imprimir(x, y);
-    std::cout << "\nExplorando: (" << x << ", " << y << ")\n";
-    usleep(200000);
+    if (x < 0 || x >= FILAS || y < 0 || y >= COLUMNAS)
+        return false;
+    if (matriz[x][y] != 1)
+        return false;
 
-    if (x == 9 && y == 9) return true;
+    matriz[x][y] = 2;  // Marcar como parte del camino
+    system("clear");
+    marcar();
+    usleep(200000); // 200 ms
 
-    // Orden de búsqueda: Abajo -> Derecha -> Arriba -> Izquierda
+
+    if (x == 9 && y == 9)
+        return true;
+
     if (dfs(x + 1, y)) return true;
     if (dfs(x, y + 1)) return true;
     if (dfs(x - 1, y)) return true;
     if (dfs(x, y - 1)) return true;
 
     matriz[x][y] = 1; // Backtrack
-    imprimir(x, y);
-    std::cout << "\nRetrocediendo desde (" << x << ", " << y << ")\n";
-    usleep(300000);
     return false;
 }
