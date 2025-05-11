@@ -21,8 +21,6 @@ Avatar::~Avatar() {
     delete moverse;
 }
 
-void Avatar::movimiento() {
-}
 
 // Mueve avatar arriba si es posible, actualiza posX
 bool Avatar::moverArriba() {
